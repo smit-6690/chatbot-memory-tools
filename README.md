@@ -89,38 +89,5 @@ Open the URL shown in the terminal (e.g. http://localhost:8501). Use the chat in
 - "Give me an inspirational quote"
 - "Remember my name is Alex" then "What's my name?" (tests memory)
 
-## Publish to GitHub
 
-**If `git` is not recognized:** Install Git from [https://git-scm.com/download/win](https://git-scm.com/download/win) (Windows). During setup, choose "Git from the command line and also from 3rd-party software" so it is added to PATH. Restart the terminal (or Cursor) after installing.
-
-**Alternative (no Git installed):** Create a new repo on GitHub, then use **"uploading an existing file"** and drag your project folder contents (do **not** upload the `.env` file or `.venv` folder).
-
----
-
-1. **Create a new repository on GitHub**
-   - Go to [https://github.com/new](https://github.com/new).
-   - Choose a name (e.g. `chatbot-memory-tools`), set visibility to **Public**, and do **not** add a README, .gitignore, or license (this project already has them).
-   - Click **Create repository**.
-
-2. **Push this project from your machine**
-   In the project folder (`New-1`), run:
-
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Chatbot with memory and tools"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/chatbot-memory-tools.git
-   git push -u origin main
-   ```
-
-   Replace `YOUR_USERNAME` with your GitHub username and `chatbot-memory-tools` with your repo name if different.
-
-   Your repo link will be: **https://github.com/YOUR_USERNAME/chatbot-memory-tools**
-
-   (`.env` is in `.gitignore`, so your API key will not be pushed.)
-
-## Resume bullets (suggested)
-
-- Built a multi-turn chatbot with LangChain using ReAct-style agent, conversation memory (buffer/summary), and tool use (search, calculator, API).
-- Implemented agentic design with web search (DuckDuckGo), safe calculator, and custom API tools; served via Streamlit UI with session-persistent memory.
+-
