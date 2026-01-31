@@ -1,23 +1,28 @@
-# Chatbot with Memory and Tools
+# Chatbot with Memory & Tools
 
-Multi-turn chatbot with **conversation memory** and **tool use** (search, calculator, API calls). Built with LangChain and Streamlit for a resume/portfolio project.
+A multi-turn AI chatbot with **conversation memory** and **tool use**: web search, calculator, and custom API (weather, quotes). Built with LangChain, Google Gemini, and Streamlit. Suitable for portfolio and resume projects.
+
+---
 
 ## Features
 
-- **Multi-turn chat** — Conversation context is kept (buffer or optional summary).
-- **Tools**  
-  - **Search** — Web search via DuckDuckGo (no API key).  
-  - **Calculator** — Safe math expressions (e.g. `2 + 3`, `10 * 5`).  
-  - **Custom API** — Weather (demo) and quotes (quotable.io).
-- **Memory** — Last N turns in buffer; optional summarised memory for long chats.
-- **Agentic design** — ReAct-style agent that decides when to call tools.
+- **Multi-turn chat** — Remembers conversation context within the session.
+- **Tools**
+  - **Search** — Web search via DuckDuckGo (no API key).
+  - **Calculator** — Safe math expressions (e.g. `2 + 3`, `10 * 5`).
+  - **Custom API** — Weather (demo) and random quotes (quotable.io with fallback).
+- **Agentic design** — LCEL + tool binding; the model decides when to call tools.
 
-## Tech stack
+## Tech Stack
 
-- **LangChain** — Agent, tools, memory.
-- **Google Gemini** — LLM (gemini-2.5-flash by default).
-- **Streamlit** — Chat UI.
-- **Python 3.10+**
+| Layer   | Technology                    |
+|--------|-------------------------------|
+| LLM    | Google Gemini (gemini-2.5-flash) |
+| Agent  | LangChain (LCEL, tool binding)   |
+| UI     | Streamlit                       |
+| Python | 3.10+                           |
+
+---
 
 ## Setup
 
@@ -44,50 +49,76 @@ Multi-turn chatbot with **conversation memory** and **tool use** (search, calcul
      ```
      GOOGLE_API_KEY=your-key-here
      ```
-   - **Where to get the API key:** Go to [Google AI Studio](https://aistudio.google.com/apikey), sign in with your Google account, click **Get API key** or **Create API key**, then copy the key into `.env`.
-   - Optional: `GEMINI_MODEL=gemini-2.5-flash`.
+   - Get a free key: [Google AI Studio](https://aistudio.google.com/apikey).
+   - Optional: `GEMINI_MODEL=gemini-2.5-flash` to use a different model.
+
+---
 
 ## Run
-
-From the project folder (with your venv activated if you use one):
 
 ```bash
 python -m streamlit run app.py
 ```
 
-If `streamlit` is on your PATH you can use `streamlit run app.py` instead.
+Open the URL shown (e.g. http://localhost:8501).
 
-Open the URL shown in the terminal (e.g. http://localhost:8501). Use the chat input to ask questions; the agent can search, calculate, and call the demo API.
+### Troubleshooting
 
-### "API key not valid" (400 INVALID_ARGUMENT)
+- **"API key not valid"** — Use a key from [Google AI Studio](https://aistudio.google.com/apikey) only (not Google Cloud Console). No spaces around `=` in `.env`.
+- **"API key not valid" (404 NOT_FOUND)** — Default model is `gemini-2.5-flash`. See [Gemini models](https://ai.google.dev/gemini-api/docs/models).
+- **429 RESOURCE_EXHAUSTED** — Free tier quota (e.g. 20 requests/day). Wait for reset or try another model in `.env`.
 
-- Get the key from **Google AI Studio** only: [https://aistudio.google.com/apikey](https://aistudio.google.com/apikey) (not from Google Cloud Console).
-- In `.env`, use `GOOGLE_API_KEY=your-key` with no spaces around `=`, and no quotes around the key.
-- Make sure there are no extra spaces or line breaks in the key; the app trims whitespace automatically.
-- You can use `GEMINI_API_KEY` instead of `GOOGLE_API_KEY` if you prefer.
+---
 
-## Project layout
+## Project Layout
 
 ```
-├── app.py                 # Streamlit chat UI
+├── app.py              # Streamlit chat UI
 ├── requirements.txt
 ├── .env.example
 ├── src/
-│   ├── agent.py           # LangChain agent (LCEL + tools, chat history)
+│   ├── agent.py        # LangChain agent (LCEL + tools, chat history)
 │   └── tools/
-│       ├── search.py      # DuckDuckGo search
-│       ├── calculator.py  # Math expression eval
-│       └── custom_api.py  # Weather (demo) + quotes API
+│       ├── search.py   # DuckDuckGo search
+│       ├── calculator.py
+│       └── custom_api.py  # Weather (demo) + quotes
 └── README.md
 ```
 
-## Example prompts
+---
+
+## Example Prompts
 
 - "What is 25 * 4?"
-- "Search for latest news on large language models"
-- "What's the weather in London?" (demo data)
-- "Give me an inspirational quote"
-- "Remember my name is Alex" then "What's my name?" (tests memory)
+- "Search for latest AI news"
+- "What's the weather in London?" (demo)
+- "Give me a random quote"
+- "My name is Alex" → "What's my name?" (tests memory)
 
+---
 
--
+## Publish to GitHub
+
+**If `git` is not recognized:** Install Git from [git-scm.com/download/win](https://git-scm.com/download/win) (Windows). Restart the terminal after installing.
+
+1. Create a new repo at [github.com/new](https://github.com/new) (e.g. `chatbot-memory-tools`). Do **not** add README, .gitignore, or license.
+2. In this project folder:
+
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit: Chatbot with memory and tools"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/chatbot-memory-tools.git
+   git push -u origin main
+   ```
+
+   Replace `YOUR_USERNAME` and `chatbot-memory-tools` with your GitHub username and repo name.  
+   `.env` is in `.gitignore`, so your API key is not pushed.
+
+---
+
+## Resume Bullets (Suggested)
+
+- Built a multi-turn chatbot with LangChain and Google Gemini using LCEL, tool binding, and conversation memory; tools include web search (DuckDuckGo), calculator, and custom API (weather, quotes).
+- Implemented agentic design with session-persistent chat history; served via Streamlit UI.
