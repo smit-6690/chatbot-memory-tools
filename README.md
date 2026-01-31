@@ -97,28 +97,4 @@ Open the URL shown (e.g. http://localhost:8501).
 
 ---
 
-## Publish to GitHub
 
-**If `git` is not recognized:** Install Git from [git-scm.com/download/win](https://git-scm.com/download/win) (Windows). Restart the terminal after installing.
-
-1. Create a new repo at [github.com/new](https://github.com/new) (e.g. `chatbot-memory-tools`). Do **not** add README, .gitignore, or license.
-2. In this project folder:
-
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Chatbot with memory and tools"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/chatbot-memory-tools.git
-   git push -u origin main
-   ```
-
-   Replace `YOUR_USERNAME` and `chatbot-memory-tools` with your GitHub username and repo name.  
-   `.env` is in `.gitignore`, so your API key is not pushed.
-
----
-
-## Resume Bullets (Suggested)
-
-- Built a multi-turn chatbot with LangChain and Google Gemini using LCEL, tool binding, and conversation memory; tools include web search (DuckDuckGo), calculator, and custom API (weather, quotes).
-- Implemented agentic design with session-persistent chat history; served via Streamlit UI.
